@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>How to Use - jsTableBuilder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen p-4 sm:p-8">
+
+    <div class="max-w-5xl mx-auto space-y-6">
+
+        <!-- Header -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+
+            <div class="text-center">
+                <h1 class="text-4xl font-black text-gray-900 tracking-tight">
+                    js<span class="text-blue-600">TableBuilder</span>
+                </h1>
+
+                <p class="text-gray-600 mt-3 text-base">
+                    How to use the Standalone Raw Data Viewer
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Introduction -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                What is jsTableBuilder?
+            </h2>
+
+            <p class="text-gray-600 leading-7">
+                jsTableBuilder is a standalone JavaScript table viewer that
+                converts JSON or CSV data into an interactive table.
+                You can upload a file, drag and drop a file, paste JSON data,
+                or use the built-in sample datasets.
+            </p>
+
+        </section>
+
+
+        <!-- Supported Formats -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                Supported File Formats
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+                <div class="bg-blue-50 rounded-xl p-5">
+                    <h3 class="font-bold text-blue-700">JSON</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Supports JSON arrays and JSON objects containing
+                        data or records.
+                    </p>
+                </div>
+
+                <div class="bg-green-50 rounded-xl p-5">
+                    <h3 class="font-bold text-green-700">CSV</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Upload CSV files with the first row containing
+                        column headers.
+                    </p>
+                </div>
+
+                <div class="bg-gray-100 rounded-xl p-5">
+                    <h3 class="font-bold text-gray-700">TXT</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Text files containing valid JSON data can also
+                        be loaded.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Step 1 -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-9 h-9 rounded-full bg-blue-600 text-white
+                             flex items-center justify-center font-bold">
+                    1
+                </span>
+
+                <h2 class="text-2xl font-bold text-gray-900">
+                    Select a File
+                </h2>
+            </div>
+
+            <p class="text-gray-600 leading-7 mb-4">
+                Click the file selection area on the main page and choose
+                a JSON, CSV, or TXT file from your computer.
+            </p>
+
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                <p class="font-semibold text-gray-700">
+                    Supported extensions:
+                </p>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    .json &nbsp; .csv &nbsp; .txt
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Step 2 -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-9 h-9 rounded-full bg-blue-600 text-white
+                             flex items-center justify-center font-bold">
+                    2
+                </span>
+
+                <h2 class="text-2xl font-bold text-gray-900">
+                    Drag & Drop
+                </h2>
+            </div>
+
+            <p class="text-gray-600 leading-7">
+                Instead of selecting the file manually, you can drag a
+                supported file from your computer and drop it directly
+                into the file upload area.
+            </p>
+
+            <div class="mt-4 bg-blue-50 border border-blue-100 rounded-xl p-4">
+                <p class="text-sm text-blue-700">
+                    The application automatically reads the dropped file
+                    and renders the table.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Step 3 -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-9 h-9 rounded-full bg-indigo-600 text-white
+                             flex items-center justify-center font-bold">
+                    3
+                </span>
+
+                <h2 class="text-2xl font-bold text-gray-900">
+                    Paste Raw JSON
+                </h2>
+            </div>
+
+            <p class="text-gray-600 leading-7 mb-4">
+                You can also paste JSON directly into the JSON textarea
+                without creating a file.
+            </p>
+
+            <div class="bg-gray-900 rounded-xl p-5 overflow-x-auto">
+                <pre class="text-sm text-gray-100"><code>[
+    {
+        "id": 1,
+        "name": "Item A",
+        "amount": 500
+    },
+    {
+        "id": 2,
+        "name": "Item B",
+        "amount": 750
+    }
+]</code></pre>
+            </div>
+
+            <p class="text-gray-600 mt-4">
+                After pasting the JSON, click
+                <strong>Render Pasted JSON</strong>.
+            </p>
+
+        </section>
+
+
+        <!-- Step 4 -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-9 h-9 rounded-full bg-indigo-600 text-white
+                             flex items-center justify-center font-bold">
+                    4
+                </span>
+
+                <h2 class="text-2xl font-bold text-gray-900">
+                    Use Sample Data
+                </h2>
+            </div>
+
+            <p class="text-gray-600 leading-7 mb-4">
+                If you do not have a file, you can test the application
+                using the built-in sample datasets.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                <div class="border border-blue-200 bg-blue-50 rounded-xl p-5">
+                    <h3 class="font-bold text-blue-700">
+                        Sample ESG Data
+                    </h3>
+
+                    <p class="text-sm text-gray-600 mt-2">
+                        Loads sample environmental, social and governance
+                        related data.
+                    </p>
+                </div>
+
+                <div class="border border-green-200 bg-green-50 rounded-xl p-5">
+                    <h3 class="font-bold text-green-700">
+                        Sample Employee Dataset
+                    </h3>
+
+                    <p class="text-sm text-gray-600 mt-2">
+                        Loads sample employee information such as name,
+                        department, role, city and salary.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Step 5 -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-9 h-9 rounded-full bg-emerald-600 text-white
+                             flex items-center justify-center font-bold">
+                    5
+                </span>
+
+                <h2 class="text-2xl font-bold text-gray-900">
+                    Automatic Column Generation
+                </h2>
+            </div>
+
+            <p class="text-gray-600 leading-7">
+                You do not need to manually define the table columns.
+                jsTableBuilder automatically detects the keys from the
+                first data object and creates the corresponding columns.
+            </p>
+
+            <div class="mt-4 bg-gray-50 rounded-xl p-5 border border-gray-200">
+
+                <p class="font-semibold text-gray-700 mb-2">
+                    Example:
+                </p>
+
+                <pre class="text-sm overflow-x-auto"><code>{
+    "empId": 1001,
+    "firstName": "Srinivas",
+    "department": "Engineering"
+}</code></pre>
+
+                <p class="text-sm text-gray-500 mt-4">
+                    The generated column names will be:
+                </p>
+
+                <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
+                    <li>Emp Id</li>
+                    <li>First Name</li>
+                    <li>Department</li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- Step 6 -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-9 h-9 rounded-full bg-emerald-600 text-white
+                             flex items-center justify-center font-bold">
+                    6
+                </span>
+
+                <h2 class="text-2xl font-bold text-gray-900">
+                    Interactive Table
+                </h2>
+            </div>
+
+            <p class="text-gray-600 leading-7 mb-4">
+                After the data is loaded, jsTableBuilder creates an
+                interactive table automatically.
+            </p>
+
+            <ul class="space-y-3 text-gray-600">
+                <li>
+                    ✓ Automatically generated columns
+                </li>
+
+                <li>
+                    ✓ Sortable columns
+                </li>
+
+                <li>
+                    ✓ Serial numbers
+                </li>
+
+                <li>
+                    ✓ Table header with record count
+                </li>
+
+                <li>
+                    ✓ Search/filter functionality provided by TableBuilder
+                </li>
+            </ul>
+
+        </section>
+
+
+        <!-- JSON Structure -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                JSON Structure
+            </h2>
+
+            <p class="text-gray-600 mb-4">
+                The recommended format is an array of objects.
+            </p>
+
+            <div class="bg-gray-900 rounded-xl p-5 overflow-x-auto">
+                <pre class="text-sm text-gray-100"><code>[
+    {
+        "id": 101,
+        "name": "Product A",
+        "price": 1200,
+        "status": "Available"
+    },
+    {
+        "id": 102,
+        "name": "Product B",
+        "price": 1500,
+        "status": "Out of Stock"
+    }
+]</code></pre>
+            </div>
+
+        </section>
+
+
+        <!-- JSON Object Support -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                JSON Object Support
+            </h2>
+
+            <p class="text-gray-600 leading-7 mb-4">
+                The application can also handle JSON objects containing
+                a <strong>data</strong> or <strong>records</strong> property.
+            </p>
+
+            <div class="bg-gray-900 rounded-xl p-5 overflow-x-auto">
+                <pre class="text-sm text-gray-100"><code>{
+    "data": [
+        {
+            "id": 1,
+            "name": "Item A"
+        },
+        {
+            "id": 2,
+            "name": "Item B"
+        }
+    ]
+}</code></pre>
+            </div>
+
+        </section>
+
+
+        <!-- CSV Format -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                CSV Format
+            </h2>
+
+            <p class="text-gray-600 mb-4">
+                The first row should contain the column headers.
+            </p>
+
+            <div class="bg-gray-900 rounded-xl p-5 overflow-x-auto">
+                <pre class="text-sm text-gray-100"><code>id,name,department,salary
+1001,Srinivas K,Engineering,145000
+1002,Ananya Sharma,Data Science,120000
+1003,Rahul Verma,Product,135000</code></pre>
+            </div>
+
+        </section>
+
+
+        <!-- Error Handling -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                Error Handling
+            </h2>
+
+            <p class="text-gray-600 leading-7 mb-4">
+                If the file contains invalid JSON, empty data, or the
+                TableBuilder library is unavailable, an error message
+                is displayed in the status area.
+            </p>
+
+            <div class="bg-red-50 border border-red-100 rounded-xl p-4">
+                <p class="text-sm text-red-700">
+                    Always make sure that your JSON is valid and contains
+                    an array of records before rendering it.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Quick Workflow -->
+        <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-5">
+                Quick Workflow
+            </h2>
+
+            <div class="space-y-4">
+
+                <div class="flex items-center gap-4">
+                    <span class="font-bold text-blue-600">01</span>
+                    <span class="text-gray-600">
+                        Open the jsTableBuilder application.
+                    </span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <span class="font-bold text-blue-600">02</span>
+                    <span class="text-gray-600">
+                        Select or drag and drop a JSON/CSV file.
+                    </span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <span class="font-bold text-blue-600">03</span>
+                    <span class="text-gray-600">
+                        Alternatively, paste a JSON array.
+                    </span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <span class="font-bold text-blue-600">04</span>
+                    <span class="text-gray-600">
+                        Click the render button if using pasted JSON.
+                    </span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <span class="font-bold text-blue-600">05</span>
+                    <span class="text-gray-600">
+                        The data is automatically converted into an interactive table.
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="text-center text-sm text-gray-400 py-4">
+            jsTableBuilder — Standalone Raw Data Viewer
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

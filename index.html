@@ -1,278 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>jsTableBuilder - Standalone Raw Data Viewer</title>
-    <!-- Tailwind CSS for clean styling -->
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- Standalone JS Engine -->
     <script type="module" src="https://cdn.jsdelivr.net/gh/TECH-SOLOMANU/jsTableBuilder/tableBuilder.js"></script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50 min-h-screen flex flex-col p-4 sm:p-8 font-sans">
 
     <div class="max-w-6xl w-full mx-auto space-y-6">
-        
+
         <!-- Header & Input Panel -->
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8 text-center space-y-6">
-            <div>
-                <h1 class="text-4xl font-black text-gray-900 tracking-tight">
-                    js<span class="text-blue-600">TableBuilder</span>
-                </h1>
-                <p class="text-gray-600 mt-2 text-base max-w-xl mx-auto">
-                    Select a file or paste raw JSON — the table renders instantly below.
-                </p>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+
+            <!-- Header -->
+            <div class="relative">
+
+                <!-- How to Use Button -->
+                <a href="./howtodo.html" class="absolute right-0 top-0 inline-flex items-center gap-2
+                           bg-gray-800 hover:bg-gray-900 text-white
+                           font-semibold text-xs sm:text-sm
+                           px-4 py-2 rounded-xl shadow transition-all">
+                    📖 How to Use
+                </a>
+
+                <div class="text-center">
+
+                    <h1 class="text-4xl font-black text-gray-900 tracking-tight">
+                        js<span class="text-blue-600">TableBuilder</span>
+                    </h1>
+
+                    <p class="text-gray-600 mt-2 text-base max-w-xl mx-auto">
+                        Select a file or paste raw JSON — the table renders instantly below.
+                    </p>
+
+                </div>
+
             </div>
 
+
             <!-- Input Controls Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6">
+
                 <!-- 1. Drag & Drop File Selector -->
-                <div id="dropZone" class="border-2 border-dashed border-gray-300 hover:border-blue-500 bg-gray-50 hover:bg-blue-50/50 transition-all rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer group">
+                <div id="dropZone" class="border-2 border-dashed border-gray-300
+                           hover:border-blue-500
+                           bg-gray-50 hover:bg-blue-50/50
+                           transition-all rounded-2xl p-6
+                           flex flex-col items-center justify-center
+                           cursor-pointer group">
+
                     <input type="file" id="fileSelector" accept=".json,.csv,.txt" class="hidden">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-blue-600 mb-3 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+
+                    <div class="w-12 h-12 bg-white rounded-full
+                               flex items-center justify-center
+                               shadow-sm text-blue-600 mb-3
+                               group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                        </svg>
                     </div>
-                    <p class="text-sm font-semibold text-gray-700">Click to choose file or Drag & Drop</p>
-                    <p class="text-xs text-gray-400 mt-1">Supports JSON & CSV files</p>
-                    <span id="fileNameDisplay" class="mt-2 text-xs font-semibold text-blue-600 hidden"></span>
+
+                    <p class="text-sm font-semibold text-gray-700">
+                        Click to choose file or Drag & Drop
+                    </p>
+
+                    <p class="text-xs text-gray-400 mt-1">
+                        Supports JSON & CSV files
+                    </p>
+
+                    <span id="fileNameDisplay" class="mt-2 text-xs font-semibold
+                               text-blue-600 hidden"></span>
+
                 </div>
+
 
                 <!-- 2. Direct JSON Paste Area -->
                 <div class="flex flex-col text-left">
+
                     <div class="flex items-center justify-between mb-2">
-                        <label for="jsonTextarea" class="text-xs font-bold text-gray-700 uppercase tracking-wider">Paste Raw JSON Array</label>
-                        <button id="clearJsonBtn" class="text-xs text-gray-400 hover:text-red-500 font-medium transition-colors">Clear</button>
+
+                        <label for="jsonTextarea" class="text-xs font-bold text-gray-700
+                                   uppercase tracking-wider">
+                            Paste Raw JSON Array
+                        </label>
+
+                        <button id="clearJsonBtn" class="text-xs text-gray-400
+                                   hover:text-red-500
+                                   font-medium transition-colors">
+                            Clear
+                        </button>
+
                     </div>
-                    <textarea id="jsonTextarea" rows="4" placeholder='Paste JSON array here, e.g. [{"id":1, "name":"Item A", "amount":500}]' class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-xs font-mono text-gray-800 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none resize-none transition-all"></textarea>
-                    <button id="renderJsonBtn" class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs py-2 px-4 rounded-lg shadow transition-colors">
+
+
+                    <textarea id="jsonTextarea" rows="4"
+                        placeholder='Paste JSON array here, e.g. [{"id":1, "name":"Item A", "amount":500}]' class="w-full bg-gray-50 border border-gray-200
+                               rounded-xl p-3 text-xs font-mono
+                               text-gray-800
+                               focus:ring-2 focus:ring-blue-500
+                               focus:bg-white outline-none
+                               resize-none transition-all"></textarea>
+
+
+                    <button id="renderJsonBtn" class="mt-2 bg-indigo-600
+                               hover:bg-indigo-700 text-white
+                               font-semibold text-xs py-2 px-4
+                               rounded-lg shadow transition-colors">
                         🚀 Render Pasted JSON
                     </button>
+
                 </div>
+
             </div>
+
 
             <!-- Quick Preset Action Buttons -->
-            <div class="flex flex-wrap items-center justify-center gap-3 pt-2 border-t border-gray-100">
-                <button id="loadEsgBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow transition-all">
+            <div class="flex flex-wrap items-center justify-center
+                       gap-3 pt-6 mt-6 border-t border-gray-100">
+
+                <button id="loadEsgBtn" class="bg-blue-600 hover:bg-blue-700
+                           text-white font-semibold
+                           text-xs sm:text-sm
+                           px-5 py-2.5 rounded-xl
+                           shadow transition-all">
                     ⚡ Sample ESG Data
                 </button>
-                <button id="loadEmployeesBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow transition-all">
+
+
+                <button id="loadEmployeesBtn" class="bg-emerald-600 hover:bg-emerald-700
+                           text-white font-semibold
+                           text-xs sm:text-sm
+                           px-5 py-2.5 rounded-xl
+                           shadow transition-all">
                     📁 Sample Employee Dataset
                 </button>
+
             </div>
+
 
             <!-- Status Alert Message -->
-            <div id="statusAlert" class="hidden text-sm font-medium p-3 rounded-xl"></div>
+            <div id="statusAlert" class="hidden text-sm font-medium
+                       p-3 rounded-xl mt-5"></div>
+
         </div>
 
+
         <!-- Rendered Table Output Container -->
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 min-h-[300px]" id="table-container">
-            <div id="table-root" class="flex flex-col items-center justify-center min-h-[240px] text-gray-400 border border-dashed border-gray-200 rounded-xl p-8 text-center">
-                <svg class="w-12 h-12 mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                <span class="text-sm font-semibold text-gray-600">No data loaded yet</span>
-                <span class="text-xs text-gray-400 mt-1 max-w-sm">Select a file above, paste a JSON array, or click a sample button to render the interactive table.</span>
+        <div class="bg-white rounded-2xl border border-gray-200
+                   shadow-sm p-6 min-h-[300px]" id="table-container">
+
+            <div id="table-root" class="flex flex-col items-center
+                       justify-center min-h-[240px]
+                       text-gray-400
+                       border border-dashed
+                       border-gray-200 rounded-xl
+                       p-8 text-center">
+
+                <svg class="w-12 h-12 mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                </svg>
+
+                <span class="text-sm font-semibold text-gray-600">
+                    No data loaded yet
+                </span>
+
+                <span class="text-xs text-gray-400 mt-1 max-w-sm">
+                    Select a file above, paste a JSON array,
+                    or click a sample button to render the interactive table.
+                </span>
+
             </div>
+
         </div>
 
     </div>
 
+
     <!-- Core Script -->
-    <script>
-        const dropZone = document.getElementById('dropZone');
-        const fileSelector = document.getElementById('fileSelector');
-        const fileNameDisplay = document.getElementById('fileNameDisplay');
-        const jsonTextarea = document.getElementById('jsonTextarea');
-        const renderJsonBtn = document.getElementById('renderJsonBtn');
-        const clearJsonBtn = document.getElementById('clearJsonBtn');
-        const loadEsgBtn = document.getElementById('loadEsgBtn');
-        const loadEmployeesBtn = document.getElementById('loadEmployeesBtn');
-        const statusAlert = document.getElementById('statusAlert');
-        const tableRoot = document.getElementById('table-root');
-
-        // Sample Backup Datasets
-        const sampleEsgData = [
-            { id: "ESG-101", facility: "Plant Alpha", carbonEmissions_MT: 1250.45, energyUse_kWh: 450000, renewableRatio: "65%", status: "Verified", auditDate: "2026-01-15" },
-            { id: "ESG-102", facility: "Plant Beta", carbonEmissions_MT: 890.12, energyUse_kWh: 320000, renewableRatio: "80%", status: "Verified", auditDate: "2026-02-01" },
-            { id: "ESG-103", facility: "Logistics Hub North", carbonEmissions_MT: 2100.80, energyUse_kWh: 610000, renewableRatio: "45%", status: "Pending Audit", auditDate: "2026-02-18" },
-            { id: "ESG-104", facility: "Solar Park East", carbonEmissions_MT: 45.20, energyUse_kWh: 950000, renewableRatio: "100%", status: "Verified", auditDate: "2026-02-20" },
-            { id: "ESG-105", facility: "HQ Tech Campus", carbonEmissions_MT: 310.60, energyUse_kWh: 180000, renewableRatio: "90%", status: "Verified", auditDate: "2026-02-21" }
-        ];
-
-        const sampleEmployeeData = [
-            { empId: 1001, name: "Srinivas K", department: "Engineering", role: "Lead Architect", city: "Bengaluru", salary: 145000 },
-            { empId: 1002, name: "Ananya Sharma", department: "Data Science", role: "Senior Analyst", city: "Hyderabad", salary: 120000 },
-            { empId: 1003, name: "Rahul Verma", department: "Product", role: "Product Manager", city: "Mumbai", salary: 135000 },
-            { empId: 1004, name: "Priya Patel", department: "Design", role: "UX Lead", city: "Pune", salary: 115000 },
-            { empId: 1005, name: "Vikram Reddy", department: "Engineering", role: "DevOps Engineer", city: "Bengaluru", salary: 128000 }
-        ];
-
-        function autoGenerateColumns(data) {
-            if (!Array.isArray(data) || data.length === 0) return [];
-            const keys = Object.keys(data[0] || {}).filter(k => k !== '$serial');
-            return keys.map(k => ({
-                header: k.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
-                dataKey: k,
-                options: { sortable: true, table: { isVisible: true } }
-            }));
-        }
-
-        function showStatus(msg, isError = false) {
-            statusAlert.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'bg-blue-50', 'text-blue-700');
-            statusAlert.classList.add(isError ? 'bg-red-50' : 'bg-blue-50', isError ? 'text-red-700' : 'text-blue-700');
-            statusAlert.textContent = msg;
-        }
-
-        // CSV Parser Utility
-        function parseCSV(text) {
-            const lines = text.trim().split(/\r\n|\n/);
-            if (lines.length < 2) return [];
-            const headers = lines[0].split(',').map(h => h.trim().replace(/^["']|["']$/g, ''));
-            return lines.slice(1).filter(l => l.trim()).map(line => {
-                const values = line.split(',').map(v => v.trim().replace(/^["']|["']$/g, ''));
-                const obj = {};
-                headers.forEach((h, i) => {
-                    const raw = values[i] || '';
-                    const num = Number(raw);
-                    obj[h] = (!isNaN(num) && raw !== '') ? num : raw;
-                });
-                return obj;
-            });
-        }
-
-        // Render Table Function
-        function renderTable(data, fileName = "Data") {
-            try {
-                tableRoot.innerHTML = '';
-                tableRoot.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'min-h-[240px]', 'text-gray-400', 'border-dashed');
-
-                const TableBuilderClass = (window.ks && window.ks.TableBuilder);
-                if (!TableBuilderClass) {
-                    throw new Error("TableBuilder library is not loaded.");
-                }
-
-                const columns = autoGenerateColumns(data);
-
-                const tableBuilder = new TableBuilderClass({
-                    htmlId: "table-root",
-                    data: data,
-                    columns: columns,
-                    tableOptions: {
-                        commonOptions: {
-                            tableWidth: "100%",
-                            showSerialNo: true
-                        },
-                        footOptions: {
-                            showFooter: true
-                        }
-                    },
-                    topHeader: {
-                        show: true,
-                        label: `${fileName} (${data.length} records)`,
-                        placeholder: "Filter or search records..."
-                    }
-                });
-
-                tableBuilder.appendToDom();
-                showStatus(`Successfully rendered ${data.length} records from "${fileName}".`);
-
-            } catch (err) {
-                console.error("Error rendering table:", err);
-                showStatus(`Failed to render table: ${err.message}`, true);
-            }
-        }
-
-        // Drag & Drop Handlers
-        dropZone.addEventListener('click', () => fileSelector.click());
-
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('border-blue-500', 'bg-blue-50');
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('border-blue-500', 'bg-blue-50');
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('border-blue-500', 'bg-blue-50');
-            if (e.dataTransfer.files.length > 0) {
-                processSelectedFile(e.dataTransfer.files[0]);
-            }
-        });
-
-        fileSelector.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                processSelectedFile(e.target.files[0]);
-            }
-        });
-
-        function processSelectedFile(file) {
-            fileNameDisplay.textContent = `Selected: ${file.name}`;
-            fileNameDisplay.classList.remove('hidden');
-            showStatus(`Reading "${file.name}"...`);
-
-            const reader = new FileReader();
-            reader.onload = (evt) => {
-                try {
-                    let parsedData;
-                    if (file.name.endsWith('.csv')) {
-                        parsedData = parseCSV(evt.target.result);
-                    } else {
-                        const json = JSON.parse(evt.target.result);
-                        parsedData = Array.isArray(json) ? json : (json.data || json.records || [json]);
-                    }
-
-                    if (!Array.isArray(parsedData) || parsedData.length === 0) {
-                        throw new Error("File contains no array data.");
-                    }
-
-                    renderTable(parsedData, file.name);
-
-                } catch (err) {
-                    showStatus(`Error reading file: ${err.message}`, true);
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        // JSON Textarea Handlers
-        function processPastedJson() {
-            const rawText = jsonTextarea.value.trim();
-            if (!rawText) {
-                showStatus("Please paste a JSON array into the textarea.", true);
-                return;
-            }
-            try {
-                const parsed = JSON.parse(rawText);
-                const data = Array.isArray(parsed) ? parsed : (parsed.data || parsed.records || [parsed]);
-                if (!Array.isArray(data) || data.length === 0) {
-                    throw new Error("JSON must be an array of objects.");
-                }
-                renderTable(data, "Pasted JSON Data");
-            } catch (err) {
-                showStatus(`Invalid JSON: ${err.message}`, true);
-            }
-        }
-
-        renderJsonBtn.addEventListener('click', processPastedJson);
-
-        clearJsonBtn.addEventListener('click', () => {
-            jsonTextarea.value = '';
-        });
-
-        // Sample Button Handlers
-        loadEsgBtn.addEventListener('click', () => {
-            renderTable(sampleEsgData, "Sample ESG Data");
-        });
-
-        loadEmployeesBtn.addEventListener('click', () => {
-            renderTable(sampleEmployeeData, "Employee Dataset");
-        });
-    </script>
+    <script src="./app.js"></script>
 
 </body>
+
 </html>
